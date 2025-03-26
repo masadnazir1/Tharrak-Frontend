@@ -47,7 +47,7 @@ router.get("/follow/getFollowing", getFollowing);
 //
 //post comments
 router.post("/add/comment", PostComment);
-router.get("/get/comments", GetComments);
+router.post("/get/comments", GetComments);
 router.delete("/del/comment", DeleteComment);
 //
 //
