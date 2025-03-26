@@ -20,6 +20,7 @@ const Login = () => {
 
       // Store token in localStorage (or use Redux/Context)
       localStorage.setItem("authToken", data.token);
+      localStorage.setItem("id", "c0a6ca00-7c51-4743-a12e-09b0dd6e567d");
 
       // Redirect to another page (example: dashboard)
       window.location.href = "/";
