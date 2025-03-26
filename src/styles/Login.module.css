@@ -1,0 +1,123 @@
+.LoginContainer {
+  height: 100vh;
+  background-color: #f7f5f5;
+  color: black;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Ensures everything is centered */
+  width: 100%; /* Ensure full width */
+  box-sizing: border-box; /* Prevents overflow due to padding */
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  width: 95%; /* Ensures inputs don’t overflow */
+}
+
+.head button {
+  border: none;
+  background-color: #fff;
+  padding: 5px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px 1px #00000016;
+}
+
+.head button img {
+  width: 80%;
+}
+
+.welcome {
+  font-size: xx-large;
+  text-align: left; /* Centers text */
+  width: 100%;
+}
+
+.Middle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 95%; /* Ensures inputs don’t overflow */
+  max-width: 400px; /* Prevents stretching on large screens */
+  gap: 10px;
+}
+
+.Middle input {
+  padding: 15px;
+  width: 100%;
+  border-radius: 5px;
+  font-weight: bold;
+  color: #000;
+  border: 2px solid #d8d7d7;
+  box-sizing: border-box; /* Prevents width issues */
+}
+
+.Forget {
+  border: none;
+  display: flex;
+  align-self: flex-end;
+  margin-top: -5px; /* Adjusts spacing */
+  background-color: transparent;
+  color: #0963d2;
+
+  cursor: pointer;
+  &:hover {
+    color: #013b82;
+    font-weight: bold;
+  }
+}
+
+.Login {
+  width: 100%;
+  max-width: 400px; /* Matches input width */
+  background: #000;
+  padding: 10px;
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center; /* Ensures text is centered */
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.Google {
+  width: 100%;
+  max-width: 400px; /* Matches input width */
+  background: transparent;
+  padding: 10px;
+  color: #000;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center; /* Ensures text is centered */
+  border-radius: 5px;
+  border: 2px solid #000;
+  cursor: pointer;
+}
+
+.newaccount {
+  display: flex;
+  position: fixed;
+  bottom: 30px;
+  gap: 10px;
+}
+.newaccount button {
+  border: none;
+  color: #0963d2;
+  background-color: transparent;
+  cursor: pointer;
+  &:hover {
+    color: #013b82;
+    font-weight: bold;
+  }
+}

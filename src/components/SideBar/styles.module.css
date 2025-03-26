@@ -1,0 +1,48 @@
+.wrapper {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 250px;
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 1px 10px 10px #00000040;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+
+.tab:hover,
+.active {
+  background: #333;
+}
+
+.Icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+}
+
+@media (max-width: 766px) {
+  .wrapper {
+    display: none;
+  }
+
+  .content {
+    display: none;
+  }
+}

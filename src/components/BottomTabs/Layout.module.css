@@ -1,0 +1,92 @@
+/* Wrapper to make sidebar & content side-by-side */
+.wrapper {
+  display: flex;
+  overflow: hidden; /* Prevents sidebar duplication */
+}
+
+/* Sidebar (Fixed on Desktop) */
+.sidebar {
+  width: 250px;
+  background-color: #fff;
+  color: #000;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  position: fixed; /* Keeps it fixed on the left */
+  height: 100vh; /* Full height */
+  top: 0;
+  font-weight: bold;
+  left: 0;
+  overflow-y: auto;
+  box-shadow: 1px 5px 5px #00000040;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+
+.tab:hover,
+.active {
+  background: #ccc;
+  border-radius: 5px;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+/* Content Area (Takes Remaining Space) */
+.content {
+  flex: 1;
+  margin-left: 250px; /* Pushes content to the right */
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* Bottom Navigation (For Mobile) */
+.bottomNav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-around;
+  padding: 5px 0;
+  box-shadow: 0px -3px 3px rgba(0, 0, 0, 0.038); /* Light shadow on top */
+}
+
+.navItem {
+  cursor: pointer;
+  padding: 10px;
+}
+
+.navIcon {
+  width: 28px;
+  height: 28px;
+}
+
+@media (min-width: 768px) {
+  .sidebar {
+    display: flex;
+  }
+  .bottomNav {
+    display: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .sidebar {
+    display: none;
+  }
+  .bottomNav {
+    display: flex;
+  }
+}
