@@ -7,6 +7,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
 .Child {
@@ -22,14 +23,16 @@
 .head {
   width: -webkit-fill-available;
   background-color: #fff;
-  border-bottom: 1px solid #999;
+  box-shadow: 2px 2px 10px 1px #00000014;
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 5vh;
-  position: sticky;
-  padding: 10px;
+  position: fixed;
   top: 0;
+  padding: 10px;
+  width: -webkit-fill-available;
+  width: calc(100% - 304px);
 }
 
 .head .back {
@@ -63,6 +66,7 @@
 h2 {
   margin-bottom: 20px;
   color: #333;
+  margin-left: 10px;
 }
 .BoxForm {
   display: flex;
@@ -84,7 +88,7 @@ h2 {
 /* Upload Box */
 .uploadBox {
   width: 100%;
-  height: 400px;
+  height: 300px;
   border: 2px dashed #ccc;
   border-radius: 10px;
   display: flex;
@@ -159,4 +163,19 @@ h2 {
   color: red;
   font-size: 14px;
   margin-top: 10px;
+}
+
+@media (max-width: 1024px) {
+  .head {
+    width: 100%;
+    background-color: #fff;
+    /* border-bottom: 1px solid #999; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 5vh;
+    position: fixed;
+    top: 0;
+    padding: 10px;
+  }
 }

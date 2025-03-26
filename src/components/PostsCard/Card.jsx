@@ -1,10 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useInsertionEffect, useState } from "react";
 import PostService from "../../services/PostService";
 import FollowersService from "../../services/FollowersService";
 import THARRAK from "../../services/AddTharrakService";
 import styles from "../../styles/PostCard.module.css";
+import { useNavigate } from "react-router-dom";
 
 const AllPosts = () => {
+  //use hooks
+  const navigate = useNavigate();
+  //
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -26,7 +30,18 @@ const AllPosts = () => {
     const U = localStorage.getItem("id");
     try {
       const res = await THARRAK.addTharrak(U, postId);
-      GET_Tharrak(postId);
+      //
+
+      console.log(res.already);
+      if (res.already != "Already liked" && res.id.length > 5) {
+        setPosts((prevPosts) =>
+          prevPosts.map((post) =>
+            post.id === postId
+              ? { ...post, tharrak_count: Number(post.tharrak_count) + 1 }
+              : post
+          )
+        );
+      }
     } catch (err) {
       setError(err.message || "Failed to add Tharrak to the post");
       setLoading(false);
@@ -62,6 +77,7 @@ const AllPosts = () => {
       setLoading(false);
     }
   };
+
   //
   useEffect(() => {
     //
@@ -136,14 +152,18 @@ const AllPosts = () => {
               onClick={() => AddTharrak(post.id)}
             >
               <img
-                src="https://cdn-icons-png.flaticon.com/128/9730/9730019.png"
+                src="https://cdn-icons-png.flaticon.com/128/4233/4233474.png"
                 alt=""
               />{" "}
               {post.tharrak_count}
             </button>
-            <button className={styles.commentButton}>
+            <button
+              className={styles.commentButton}
+              onClick={() => navigate(`/comments/${post.id}/${post.username}`)}
+            >
               <img
-                src="https://cdn-icons-png.flaticon.com/128/4233/4233474.png"
+                //
+                src="https://cdn-icons-png.flaticon.com/128/9730/9730019.png"
                 alt=""
               />{" "}
               {post.comment_count}

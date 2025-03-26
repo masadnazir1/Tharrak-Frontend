@@ -6,7 +6,7 @@ const ExplorePage = () => {
   return (
     <div className={styles.Container}>
       <div className={styles.Child}>
-        <h2>Trending</h2>
+        <h4>Trending</h4>
         <Trendings />
       </div>
     </div>

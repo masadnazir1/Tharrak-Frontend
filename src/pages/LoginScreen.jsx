@@ -2,6 +2,7 @@ import { useState } from "react";
 import styles from "../styles/Login.module.css";
 import LoginService from "../services/LoginService";
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode"; // ✅ Correct import for ESM
 
 const Login = () => {
   const navigate = useNavigate();
@@ -20,7 +21,12 @@ const Login = () => {
 
       // Store token in localStorage (or use Redux/Context)
       localStorage.setItem("authToken", data.token);
-      localStorage.setItem("id", "c0a6ca00-7c51-4743-a12e-09b0dd6e567d");
+      const tokendata = localStorage.getItem("authToken");
+      if (tokendata) {
+        const decodedToken = jwtDecode(tokendata);
+        console.log("Decoded JWT:", decodedToken);
+        localStorage.setItem("id", decodedToken.user.id);
+      }
 
       // Redirect to another page (example: dashboard)
       window.location.href = "/";

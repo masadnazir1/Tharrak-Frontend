@@ -5,23 +5,29 @@ import styles from "../styles/Friends.module.css";
 const FriendsPage = () => {
   const [Foller, setFoller] = useState([]);
   const [loading, setloading] = useState(false);
+  const [loadingFollow, setloadingFollow] = useState(false);
   console.log(Foller);
 
   //
   const UNFOLLOW = async (userid) => {
-    setloading(true);
+    setloadingFollow(true);
     console.log(userid);
     const U = localStorage.getItem("id");
     try {
       const res = await FollowersService.unfollowUser(U, userid);
       console.log(res.message);
-      if (res.message == "Unfollowed successfully") {
-        setisFollowing(false);
-        setloading(false);
+
+      setFoller((prevFollowers) =>
+        prevFollowers.filter((follower) => follower.id != userid)
+      );
+
+      setisFollowing(false);
+      setloadingFollow(false);
+
+      if (res.message === "Unfollowed successfully") {
       }
     } catch (err) {
-      setError(err.message || "Failed to Follow");
-      setloading(false);
+      setloadingFollow(false);
     }
   };
   //
@@ -47,7 +53,7 @@ const FriendsPage = () => {
   return (
     <div className={styles.Container}>
       <div className={styles.Child}>
-        <h2>Trending</h2>
+        <h4>Trending</h4>
         {loading && <span style={{ color: "#000" }}>Loading...</span>}
         {Foller.map((follower) => (
           <div key={follower.id} className={styles.FollerListCard}>
@@ -64,7 +70,7 @@ const FriendsPage = () => {
               onClick={() => UNFOLLOW(follower.id)}
               className={styles.UNFOLLOW}
             >
-              UNFOLLOW
+              {loadingFollow ? "Unfollowing.." : "UNFOLLOW"}
             </button>
           </div>
         ))}

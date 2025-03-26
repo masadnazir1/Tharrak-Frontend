@@ -14,9 +14,10 @@
   justify-content: center;
   flex-direction: column;
 }
-.Child h2 {
+.Child h4 {
   text-align: left;
   width: 98%;
+  height: 10px;
 }
 
 .FollerListCard {
@@ -54,6 +55,7 @@
   background-color: #000;
   cursor: pointer;
   margin-left: 10px;
+  color: #fff;
   font-weight: bold;
   border-radius: 5px;
   &:hover {

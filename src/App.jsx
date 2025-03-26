@@ -3,6 +3,7 @@ import {
   Routes,
   Route,
   useLocation,
+  useNavigate,
 } from "react-router-dom";
 import { useEffect, useState } from "react";
 import HomePage from "./pages/HomePage";
@@ -10,12 +11,14 @@ import ExplorePage from "./pages/ExplorePage";
 import CreatePostPage from "./pages/CreatePostPage";
 import FriendsPage from "./pages/FriendsPage";
 import ProfilePage from "./pages/ProfilePage";
-import LoginPage from "./pages/LoginScreen"; // Example
+import LoginPage from "./pages/LoginScreen";
 import Register from "./pages/RegisterScreen";
 import Tabs from "./components/BottomTabs/Tabs";
 import CreateDeskTop from "./pages/CreatDesktop";
 import SplashScreen from "./pages/SplashScreen";
 import Dashboard from "./pages/Dashboard";
+import CommentsPage from "./pages/CommentsPage";
+import { isTokenExpired } from "./utils/authCheck";
 
 import "./App.css";
 
@@ -24,17 +27,30 @@ function AppContent() {
   const [full, setFull] = useState(false);
 
   useEffect(() => {
-    if (
-      location.pathname === "/login" ||
-      location.pathname === "/create" ||
-      location.pathname === "/signup"
-    ) {
-      setFull(true);
+    if (isTokenExpired()) {
+      console.log("Token expired! Logging out...");
+      localStorage.removeItem("authToken"); // Remove expired token
+      localStorage.removeItem("id"); // Remove user ID
+
+      // 🔴 Fix: Prevent redirect loop
+      if (location.pathname !== "/login") {
+        window.location.href = "/login"; // Redirect to login ONLY if not already there
+      }
     }
-  }, [location.pathname]);
+
+    // Handle the "Full" UI state
+    if (["/login", "/create", "/signup"].includes(location.pathname)) {
+      setFull(true);
+    } else {
+      setFull(false);
+    }
+  }, [location.pathname]); // Runs when pathname changes
 
   // Define routes where Tabs should be hidden
-  const hiddenRoutes = ["/login", "/signup", "/create"];
+  const hiddenRoutes = ["/login", "/signup", "/create", "/comments"];
+
+  // Hide tabs for dynamic "/comments/:postId/:username" route
+  const hideTabs = hiddenRoutes.includes(location.pathname);
 
   return (
     <>
@@ -49,26 +65,34 @@ function AppContent() {
           <Route path="/signup" element={<Register />} />
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/CreateDeskTop" element={<CreateDeskTop />} />
+          <Route
+            path="/comments/:postId/:username"
+            element={<CommentsPage />}
+          />
         </Routes>
       </div>
 
       {/* Show Tabs only if current route is NOT in hiddenRoutes */}
-      {!hiddenRoutes.includes(location.pathname) && <Tabs />}
+      {!hideTabs && <Tabs />}
     </>
   );
 }
 
 function App() {
-  const [showSplash, setShowSplash] = useState(true);
+  const [showSplash, setShowSplash] = useState(
+    window.location.pathname === "/" // Show splash only if user is on "/"
+  );
 
   useEffect(() => {
-    // Hide splash screen after 3 seconds
-    const timer = setTimeout(() => {
-      setShowSplash(false);
-    }, 3000);
+    if (showSplash) {
+      // Hide splash screen after 3 seconds
+      const timer = setTimeout(() => {
+        setShowSplash(false);
+      }, 3000);
 
-    return () => clearTimeout(timer);
-  }, []);
+      return () => clearTimeout(timer);
+    }
+  }, [showSplash]);
 
   return <Router>{showSplash ? <SplashScreen /> : <AppContent />}</Router>;
 }

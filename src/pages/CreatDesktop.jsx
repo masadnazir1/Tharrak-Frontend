@@ -52,19 +52,18 @@ const CreateDeskTop = () => {
 
   return (
     <div className={styles.container}>
+      <div className={styles.head}>
+        <h2>Create a New Post</h2>
+        {/* Upload Button */}
+        <button
+          onClick={handleUpload}
+          disabled={loading}
+          className={styles.uploadBtnhead}
+        >
+          {loading ? "Uploading..." : "Upload"}
+        </button>
+      </div>
       <div className={styles.Child}>
-        <div className={styles.head}>
-          <h2>Create a New Post</h2>
-          {/* Upload Button */}
-          <button
-            onClick={handleUpload}
-            disabled={loading}
-            className={styles.uploadBtnhead}
-          >
-            {loading ? "Uploading..." : "Upload"}
-          </button>
-        </div>
-
         <section className={styles.BoxForm}>
           {/* Image Upload Box */}
           <div

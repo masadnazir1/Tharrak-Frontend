@@ -1,6 +1,6 @@
-//const BASE_URL = "http://localhost:5000/api"; // Replace with your actual API base URL
+const BASE_URL = "http://localhost:5000/api"; // Replace with your actual API base URL
 //http://tharrak_api.galaxydev.pk/
-const BASE_URL = "https://tharrakapi.galaxydev.pk/api";
+//const BASE_URL = "https://tharrakapi.galaxydev.pk/api";
 
 const EXPORTAPIURL = {
   AUTH: {
@@ -33,6 +33,10 @@ const EXPORTAPIURL = {
     FOLLOW: `${BASE_URL}/follow/add`,
     UNFOLLOW: `${BASE_URL}/follow/del`,
     GEALL: `${BASE_URL}/follow/getall`,
+  },
+  COMMENTS: {
+    GET: `${BASE_URL}/get/comments`,
+    POST: `${BASE_URL}/add/comment`,
   },
 };
 
