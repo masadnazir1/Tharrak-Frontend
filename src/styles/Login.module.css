@@ -60,6 +60,7 @@
   color: #000;
   border: 2px solid #d8d7d7;
   box-sizing: border-box; /* Prevents width issues */
+  background-color: #fff;
 }
 
 .Forget {
